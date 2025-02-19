@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_auracode_app/features/auth/presentation/pages/signup_page.dart';
 import 'core/theme/app_theme.dart';
 import 'features/home/presentation/pages/home_page.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const SignupPage(),
       theme: AppTheme.lightTheme,
     );
   }

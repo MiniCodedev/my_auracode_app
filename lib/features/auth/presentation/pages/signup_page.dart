@@ -10,6 +10,17 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "Moodify",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
+          ),
+        ],
+      ),
+    );
   }
 }
