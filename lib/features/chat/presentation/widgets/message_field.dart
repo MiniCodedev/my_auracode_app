@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_auracode_app/core/theme/app_colors.dart';
 
-class BasicField extends StatelessWidget {
+class MessageField extends StatelessWidget {
   final TextEditingController textEditingController;
-  const BasicField({super.key, required this.textEditingController});
+  const MessageField({super.key, required this.textEditingController});
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +14,15 @@ class BasicField extends StatelessWidget {
       child: TextField(
           controller: textEditingController,
           decoration: InputDecoration(
-            hintText: "Search",
-            prefixIcon: Icon(Icons.search_rounded),
+            hintText: "Message",
+            prefixIcon: Icon(Icons.message_rounded),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide:
                     BorderSide(color: Theme.of(context).cardColor, width: 2)),
-            enabled: true,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
-                borderSide:
-                    BorderSide(color: Theme.of(context).cardColor, width: 2)),
+                borderSide: BorderSide(color: Colors.grey, width: 1)),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide:

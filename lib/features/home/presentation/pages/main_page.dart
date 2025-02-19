@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_auracode_app/core/theme/app_colors.dart';
 import 'package:my_auracode_app/core/theme/app_theme.dart';
@@ -27,7 +26,7 @@ class _MainPageState extends State<MainPage> {
         bottomNavigationBar: Container(
           decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(10)),
+              borderRadius: BorderRadius.circular(20)),
           margin: EdgeInsets.all(15),
           padding: EdgeInsets.all(5),
           child: Row(
