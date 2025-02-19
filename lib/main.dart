@@ -10,7 +10,7 @@ import 'package:my_auracode_app/features/auth/data/auth_datasources.dart';
 import 'package:my_auracode_app/features/auth/domain/auth_repository.dart';
 import 'package:my_auracode_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:my_auracode_app/features/auth/presentation/pages/signup_page.dart';
-import 'package:my_auracode_app/features/home/presentation/pages/home_page.dart';
+import 'package:my_auracode_app/features/home/presentation/pages/main_page.dart';
 import 'package:my_auracode_app/firebase_options.dart';
 import 'core/theme/app_theme.dart';
 
@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
             return Loader();
           }
           if (state is AppUserLoginSuccess) {
-            return HomePage();
+            return MainPage();
           }
           return const SignupPage();
         },

@@ -7,4 +7,14 @@ class AppTheme {
     brightness: Brightness.dark,
     useMaterial3: true,
   );
+
+  static BoxDecoration themeBoxDecoration = BoxDecoration(
+      gradient: LinearGradient(
+    colors: [
+      AppColors.primaryColor,
+      darkTheme.cardColor,
+    ],
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+  ));
 }
