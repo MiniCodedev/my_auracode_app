@@ -6,11 +6,11 @@ import 'package:my_auracode_app/core/error/server_failure.dart';
 import 'package:my_auracode_app/core/model/user.dart' as userModel;
 
 class AuthDataSource {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth firebaseAuth;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   final ChatDataSource chatDatasource;
 
-  AuthDataSource({required this.chatDatasource});
+  AuthDataSource({required this.chatDatasource, required this.firebaseAuth});
 
   Future<userModel.User> signInWithGoogle() async {
     try {
@@ -28,7 +28,7 @@ class AuthDataSource {
       );
 
       final UserCredential userCredential =
-          await _auth.signInWithCredential(credential);
+          await firebaseAuth.signInWithCredential(credential);
 
       if (userCredential.user == null) {
         throw ServerException("Something went wrong!");
@@ -46,6 +46,6 @@ class AuthDataSource {
 
   Future<void> signOut() async {
     await _googleSignIn.signOut();
-    await _auth.signOut();
+    await firebaseAuth.signOut();
   }
 }
