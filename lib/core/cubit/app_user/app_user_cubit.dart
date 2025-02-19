@@ -21,6 +21,8 @@ class AppUserCubit extends Cubit<AppUserState> {
         if (user1 != null) {
           final user_ = await chatDataSource.getUserData(user1.uid);
           user = user_;
+          print(user_.toString());
+
           emit(AppUserLoginSuccess());
         } else {
           emit(AppUserInitial());

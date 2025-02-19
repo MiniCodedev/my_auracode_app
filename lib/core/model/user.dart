@@ -8,7 +8,7 @@ class User {
   final String name;
   final String email;
   final String phoneNumber;
-  final List<String> groupList;
+  final List<dynamic> groupList;
 
   User({
     required this.uid,
@@ -23,7 +23,7 @@ class User {
     String? name,
     String? email,
     String? phoneNumber,
-    List<String>? groupList,
+    List<dynamic>? groupList,
   }) {
     return User(
       uid: uid ?? this.uid,
@@ -49,9 +49,9 @@ class User {
         uid: map['uid'] as String,
         name: map['name'] as String,
         email: map['email'] as String,
-        phoneNumber: map['phoneNumber'] as String,
-        groupList: List<String>.from(
-          (map['groupList'] as List<String>),
+        phoneNumber: map['phoneNumber'] ?? "",
+        groupList: List<dynamic>.from(
+          (map['groupList'] as List<dynamic>),
         ));
   }
 
