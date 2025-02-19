@@ -1,32 +1,37 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:my_auracode_app/core/error/server_failure.dart';
 import 'package:my_auracode_app/core/model/user.dart' as userModel;
 
 class ChatDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<userModel.User> saveUserToFirestore(User user) async {
-    final userData = await getUserData(user.uid);
-    if (userData != null) {
-      return userData;
-    } else {
-      final userDoc = _firestore.collection('Users').doc(user.uid);
-      await userDoc.set(
-        {
-          'name': user.displayName,
-          'email': user.email,
-          'phoneNumber': user.phoneNumber,
-          'uid': user.uid,
-          'groupList': [],
-        },
-      );
-      return userModel.User(
-        uid: user.uid,
-        name: user.displayName ?? '',
-        email: user.email ?? '',
-        phoneNumber: user.phoneNumber ?? '',
-        groupList: [],
-      );
+    try {
+      final userData = await getUserData(user.uid);
+      if (userData != null) {
+        return userData;
+      } else {
+        final userDoc = _firestore.collection('Users').doc(user.uid);
+        await userDoc.set(
+          {
+            'name': user.displayName,
+            'email': user.email,
+            'phoneNumber': user.phoneNumber,
+            'uid': user.uid,
+            'groupList': [],
+          },
+        );
+        return userModel.User(
+          uid: user.uid,
+          name: user.displayName ?? '',
+          email: user.email ?? '',
+          phoneNumber: user.phoneNumber ?? '',
+          groupList: [],
+        );
+      }
+    } catch (e) {
+      throw ServerException(e.toString());
     }
   }
 

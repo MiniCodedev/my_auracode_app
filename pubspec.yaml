@@ -36,6 +36,7 @@ dependencies:
   firebase_storage: ^12.4.3
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.0.0
   flutter_svg: ^2.0.17
   fpdart: ^1.1.1
   google_sign_in: ^6.2.2

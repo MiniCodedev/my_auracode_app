@@ -37,8 +37,10 @@ class AuthDataSource {
           await chatDatasource.saveUserToFirestore(userCredential.user!);
 
       return user;
+    } on ServerException catch (e) {
+      throw ServerException('Error during Google Sign-In: ${e.message}');
     } catch (e) {
-      throw ServerException('Error during Google Sign-In: $e');
+      throw ServerException('Error during Google Sign-In: ${e.toString()}');
     }
   }
 
