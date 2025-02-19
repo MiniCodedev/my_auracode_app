@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const SignupPage(),
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.darkTheme,
     );
   }
 }
