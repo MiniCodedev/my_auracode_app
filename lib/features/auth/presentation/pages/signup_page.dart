@@ -16,7 +16,7 @@ class _SignupPageState extends State<SignupPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            "Moodify",
+            "WordWise",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50),
           ),
         ],

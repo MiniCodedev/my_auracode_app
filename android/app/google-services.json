@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "133935237195",
+    "project_id": "moodify-app-db",
+    "storage_bucket": "moodify-app-db.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133935237195:android:2e95ff520731f7e8e1a5ce",
+        "android_client_info": {
+          "package_name": "com.example.my_auracode_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDuPZ42hQzitLRvbaFo-RXDsaR50-eY6r8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
