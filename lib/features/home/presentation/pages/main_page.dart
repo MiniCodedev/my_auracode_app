@@ -13,7 +13,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int selectedPage = 0;
+  int selectedPage = 1;
   final pages = [HomePage(), ContactPage(), SettingsPage()];
 
   @override
@@ -32,16 +32,6 @@ class _MainPageState extends State<MainPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              IconButton(
-                  onPressed: () {
-                    setState(() {
-                      selectedPage = 0;
-                    });
-                  },
-                  icon: Icon(
-                    Icons.home_rounded,
-                    color: selectedPage == 0 ? AppColors.primaryColor : null,
-                  )),
               IconButton(
                 onPressed: () {
                   setState(() {

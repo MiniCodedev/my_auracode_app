@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:my_auracode_app/core/cubit/app_user/app_user_cubit.dart';
+import 'package:my_auracode_app/core/key/api_key.dart';
 import 'package:my_auracode_app/core/model/user.dart';
 import 'package:my_auracode_app/core/theme/app_colors.dart';
 import 'package:my_auracode_app/features/chat/presentation/widgets/message_field.dart';
@@ -18,6 +20,19 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   final TextEditingController messageController = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final ScrollController scrollController = ScrollController();
+  final GenerativeModel model = GenerativeModel(
+    model: 'gemini-1.5-flash-latest',
+    apiKey: ApiKey.geminiApiKey,
+  );
+
+  void checkGrammer() async {
+    final prompt =
+        "'${messageController.text}' correct this grammer and return only the correct sentence or you can not correct then return the same sentence.";
+    final content = [Content.text(prompt)];
+    final response = await model.generateContent(content);
+    messageController.text = response.text ?? "";
+  }
 
   String getChatId() {
     final currentUser = context.read<AppUserCubit>().user!;
@@ -43,6 +58,7 @@ class _ChatPageState extends State<ChatPage> {
           "messageTime": DateTime.now(),
           'timestamp': FieldValue.serverTimestamp(),
         });
+        scrollController.jumpTo(scrollController.position.maxScrollExtent);
       } catch (e) {
         print("Error sending message: $e");
       }
@@ -97,6 +113,7 @@ class _ChatPageState extends State<ChatPage> {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: ListView.builder(
+                    controller: scrollController,
                     itemCount: messages.length,
                     itemBuilder: (context, index) {
                       final messageData =
@@ -124,7 +141,7 @@ class _ChatPageState extends State<ChatPage> {
                 Expanded(
                   child: MessageField(
                     textEditingController: messageController,
-                    onPressed: submit,
+                    onPressed: checkGrammer,
                   ),
                 ),
                 SizedBox(
