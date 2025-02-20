@@ -3,7 +3,11 @@ import 'package:my_auracode_app/core/theme/app_colors.dart';
 
 class MessageField extends StatelessWidget {
   final TextEditingController textEditingController;
-  const MessageField({super.key, required this.textEditingController});
+  final void Function() onPressed;
+  const MessageField(
+      {super.key,
+      required this.textEditingController,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +20,8 @@ class MessageField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: "Message",
             prefixIcon: Icon(Icons.message_rounded),
+            suffixIcon: IconButton(
+                onPressed: onPressed, icon: Icon(Icons.stars_rounded)),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide:

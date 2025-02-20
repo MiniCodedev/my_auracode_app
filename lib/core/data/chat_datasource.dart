@@ -65,4 +65,46 @@ class ChatDataSource {
         .orderBy('timestamp', descending: true)
         .snapshots();
   }
+
+  Stream<QuerySnapshot> getAllChats(String userId) {
+    return _firestore
+        .collection('chats')
+        .where('participants', arrayContains: userId)
+        .orderBy('lastMessageTime', descending: true)
+        .snapshots();
+  }
+
+  Future<String> createChat(String userId1, String userId2) async {
+    try {
+      final chatQuery = await _firestore
+          .collection('chats')
+          .where('participants', arrayContains: userId1)
+          .get();
+
+      for (var doc in chatQuery.docs) {
+        final participants = List<String>.from(doc['participants']);
+        if (participants.contains(userId2)) {
+          return doc.id; // Chat already exists
+        }
+      }
+
+      // Create new chat
+      final chatDoc = await _firestore.collection('chats').add({
+        'participants': [userId1, userId2],
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      return chatDoc.id;
+    } catch (e) {
+      throw ServerException('Error creating chat: ${e.toString()}');
+    }
+  }
+
+  Stream<QuerySnapshot> getRecentChats(String userId) {
+    return _firestore
+        .collection('chats')
+        .where('participants', arrayContains: userId)
+        .orderBy('lastMessageTime', descending: true)
+        .snapshots();
+  }
 }

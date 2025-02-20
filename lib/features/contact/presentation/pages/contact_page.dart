@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_auracode_app/core/common/widgets/basic_field.dart';
+import 'package:my_auracode_app/core/cubit/app_user/app_user_cubit.dart';
 import 'package:my_auracode_app/core/model/user.dart';
 import 'package:my_auracode_app/core/utils/loader.dart';
 import 'package:my_auracode_app/features/chat/presentation/pages/chat_page.dart';
@@ -71,16 +73,20 @@ class _ContactPageState extends State<ContactPage> {
 
                   return ListView.builder(
                     itemCount: filteredUsers.length,
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
                       final user = User.fromMap(filteredUsers[index].data());
-                      return ContactTile(
-                        user: user,
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => ChatPage(user: user),
-                          ));
-                        },
-                      );
+                      if (user.uid != context.read<AppUserCubit>().user!.uid) {
+                        return ContactTile(
+                          user: user,
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ChatPage(user: user),
+                            ));
+                          },
+                        );
+                      }
+                      return Container();
                     },
                   );
                 },
